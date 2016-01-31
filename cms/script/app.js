@@ -1,5 +1,6 @@
 var cms=angular.module('cmshome',['angular-loading-bar','ngSanitize', 'ngAnimate', 'ngRoute', 'ngMessages']);
 
+var baseurl="http://localhost/";
 
 cms.config(function ($routeProvider) {
 	$routeProvider.when('/login',{
@@ -31,7 +32,7 @@ cms.controller('loginCtrl',function ($scope,$http,$rootScope){
 	 $scope.login = function () {
         $http({
             method: 'POST',
-            url: "http://localhost/cms/api/login.php?q=login",
+            url: baseurl+"cms/api/login.php?q=login",
             data: {password:$scope.login.password,username:$scope.login.username}
         }).success(function (data) {
             if(data=='login success'){
@@ -45,7 +46,7 @@ cms.controller('loginCtrl',function ($scope,$http,$rootScope){
     $scope.signup = function () {
         $http({
             method: 'POST',
-            url: "http://localhost/cms/api/login.php?q=signup",
+            url: baseurl+"cms/api/login.php?q=signup",
             data: {password:$scope.signup.password,username:$scope.signup.username}
         }).success(function (data) {
             $rootScope.$broadcast('showMessage',data);
@@ -64,7 +65,7 @@ cms.controller('contactsCtrl',function ($scope,$http,$rootScope){
 	$scope.addcontact=function(){
 		$http({
 		    method: 'POST',
-		    url: "http://localhost/cms/api/contacts.php?q=add",
+		    url: baseurl+"cms/api/contacts.php?q=add",
 		    data: { name:$scope.name,team:$scope.team,phno:$scope.phonenumber}
 		}).success(function (data) {
 		    $rootScope.$broadcast('showMessage',data+".Please refresh");
@@ -72,14 +73,14 @@ cms.controller('contactsCtrl',function ($scope,$http,$rootScope){
 	};
 
 	$scope.contacts=[];
-	$http.get("http://localhost/api/contacts.php").success(function (response) {
+	$http.get(baseurl+"api/contacts.php").success(function (response) {
         $scope.contacts = response;
     });
 
     $scope.deletecontact=function(parms){
     	$http({
 		    method: 'POST',
-		    url: "http://localhost/cms/api/contacts.php?q=delete",
+		    url: baseurl+"cms/api/contacts.php?q=delete",
 		    data: { id:parms}
 		}).success(function (data) {
 		    $rootScope.$broadcast('showMessage',data+".Please refresh.");
@@ -94,7 +95,7 @@ cms.controller('updatesCtrl',function ($scope,$http,$rootScope){
 	$scope.addupdate=function(){
 		$http({
 		    method: 'POST',
-		    url: "http://localhost/cms/api/updates.php?q=add",
+		    url: baseurl+"cms/api/updates.php?q=add",
 		    data: { news:$scope.updatemessage }
 		}).success(function (data) {
 		    $rootScope.$broadcast('showMessage',data+".Please refresh");
@@ -104,14 +105,14 @@ cms.controller('updatesCtrl',function ($scope,$http,$rootScope){
 	$scope.deleteupdate=function(parms){
 		$http({
 		    method: 'POST',
-		    url: "http://localhost/cms/api/updates.php?q=delete",
+		    url: baseurl+"cms/api/updates.php?q=delete",
 		    data: { id:parms}
 		}).success(function (data) {
 		    $rootScope.$broadcast('showMessage',data+".Please refresh.");
 		});
 	};
 
-	$http.get("http://localhost/api/updates.php").success(function (response) {
+	$http.get(baseurl+"api/updates.php").success(function (response) {
 	     $scope.updates = response;
 	});
 
@@ -124,21 +125,21 @@ cms.controller('aboutusCtrl',function ($scope,$http,$rootScope){
 	 	content=content.replace(new RegExp('\n|\t','g'),'');
  	 	$http({
  		    method: 'POST',
- 		    url: "http://localhost/cms/api/aboutus.php?q=add",
+ 		    url: baseurl+"cms/api/aboutus.php?q=add",
  		    data: {title:$scope.title,content:content}
  		}).success(function (data) {
  		    $rootScope.$broadcast('showMessage',data+".Please refresh.");
  		});
 	 };
 	 $scope.abttabs=[];
-	 $http.get("http://localhost/api/aboutus.php").success(function (response) {
+	 $http.get(baseurl+"api/aboutus.php").success(function (response) {
 	     $scope.abttabs = response;
 	 });
 
 	 $scope.deleteTab=function(id){
 	 	$http({
 		    method: 'POST',
-		    url: "http://localhost/cms/api/aboutus.php?q=delete",
+		    url: baseurl+"cms/api/aboutus.php?q=delete",
 		    data: { id:id}
 		}).success(function (data) {
 		    $rootScope.$broadcast('showMessage',data+".Please refresh.");
@@ -151,7 +152,7 @@ cms.controller('pushCtrl',function ($rootScope,$scope,$http){
     $scope.push=function(){
     	$http({
             method: 'POST',
-            url: "http://localhost/cms/api/sendpush.php",
+            url: baseurl+"cms/api/sendpush.php",
             data: $scope.pushmessage
         }).success(function (data) {
             if(data=='success'){
