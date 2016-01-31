@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>
+		gmail
+	</title>
+	<style>
+	</style>
+	<meta name="google-signin-client_id" content="400502752733-lprr94cu90p63bqa66dbksl6q80hts37.apps.googleusercontent.com">
+</head>
+<body>
+	<div id="my-signin2"  data-width="1000" data-height="300" data-longtitle="false"></div>
+	  <script>
+	    function onSuccess(googleUser) {
+	      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+	    }
+	    function onFailure(error) {
+	      console.log(error);
+	    }
+	    function renderButton() {
+	      gapi.signin2.render('my-signin2', {
+	        'scope': 'https://www.googleapis.com/auth/plus.login',
+	        'width': 300,
+	        'height': 50,
+	        'longtitle': false,
+	        'theme': 'dark',
+	        'onsuccess': onSuccess,
+	        'onfailure': onFailure
+	      });
+	    }
+	  </script>
+
+	  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+</body>
+</html>

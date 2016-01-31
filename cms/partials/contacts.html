@@ -1,0 +1,45 @@
+<div class="container">
+	<div class="row">
+		<div class="form-group">
+			<label for="name">Name</label>
+			<input type="text" class="form-control" id="name" name="name" ng-model="name">
+		</div>
+	    <div class="form-group">
+		    <label for="team">Team</label>
+			<select class="form-control" name="team" id="team" ng-model="team">
+				<option value="Events">Events</option>
+				<option value="Workshop">Workshops</option>
+				<option value="Hospitality">Hospitality</option>
+				<option value="Projects">Projects</option>
+				<option value="Web&amp;Tech">Web and Tech</option>
+				<option value="Logistics">Logistics</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="phnumber">Phone number</label>
+			<input class="form-control" type="number" id="phnumber" name="phnumber" ng-model="phonenumber">
+		</div>
+		<button class="btn btn-primary" ng-click="addcontact()">Add Contact</button>
+	</div>
+	<div class="row">
+		<table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Team</th>
+            <th>Contact</th>
+        </tr>
+        </thead>
+        <tbody ng-repeat="(key,con) in contacts">
+		    <tr ng-repeat="contact in con">
+		        <td>{{contact.name}}</td>
+		        <td>{{key}}</td>
+		        <td>{{contact.phone}}</td>
+		        <td>
+		            <button class="btn btn-danger" ng-click="deletecontact(contact.id)">delete</button>
+		        </td>
+		    </tr>
+        </tbody>
+    </table>
+	</div>
+</div>

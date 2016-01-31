@@ -1,0 +1,58 @@
+<div class="container jumbotron">
+	<div class="row">
+		<div class="col-md-6" style="padding:40px">
+			<h3>Signup</h3>
+			<form name="signupform" class="form" ng-submit="signup()">
+                <div class="form-group">
+                    <label for="signup-username">Username</label>
+                    <input type="text" class="form-control" id="signup-username" name="username" ng-model="signup.username" required/>
+                    <div ng-messages="signupform.username.$error">
+                        <div ng-message="required" class="error">Username requried</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="signupform-password">Password</label>
+                    <input type="{{showpass?'text':'password'}}" class="form-control" id="signupform-password" name="password" ng-model="signup.password" required/>
+                    <div ng-messages="signupform.password.$error">
+                        <div ng-message="required" class="error">Passowrd requried</div>
+                    </div>
+                </div>
+                <div class="from-group">
+                    <label for="showpassword">Showpassword</label>
+                    <input type="checkbox" id="showpassword" ng-model="showpass"/>
+                </div>
+                <button class="btn btn-primary" type="submit">
+                    Signup
+                </button>
+            </form>
+		</div>
+		<div class="col-md-6" style="padding:40px">
+			<h3>Login</h3>
+			<form name="loginform" class="form" ng-submit="login()">
+			    <div class="form-group">
+			        <label for="login-username">Username</label>
+			        <input type="text" class="form-control" id="login-username" name="username" ng-model="login.username" required/>
+			        <div ng-messages="loginform.username.$error">
+			            <div ng-message="required" class="error">Username equried</div>
+			        </div>
+			    </div>
+
+			    <div class="form-group">
+			        <label for="login-password">Password</label>
+			        <input type="{{showloginpass?'text':'password'}}" class="form-control" id="login-password" name="password" ng-model="login.password" required/>
+			        <div ng-messages="loginform.password.$error">
+			            <div ng-message="required" class="error">Password requried</div>
+			        </div>
+			    </div>
+			    <div class="from-group">
+			        <label for="showloginpassword">Showpassword</label>
+			        <input type="checkbox" id="showloginpassword" ng-model="showloginpass"/>
+			    </div>
+
+			    <button class="btn btn-default" type="submit">
+			        Login
+			    </button>
+			</form>
+		</div>
+	</div>
+</div>

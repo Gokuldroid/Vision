@@ -1,0 +1,47 @@
+.login-title{
+	font-weight: 200;
+    font-size: 30px;
+    width: auto;
+    color: white;
+    padding: 5% 40% 5% 40%;
+    font-family: 'Audiowide', cursive; 
+}
+
+.login-container{
+	background-color:rgba(0,0,0,0.7);
+    font-family: 'Audiowide', cursive;
+    color: rgba(60,245,0,1);
+    padding:10px;
+    border: rgba(60,245,0,0.7) 2px solid;
+    border-radius: 15px 0px 15px 0px;
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+}
+.login-container img,.login-container div{
+	display: inline-block;
+}
+
+.login-container img{
+	width: 75px;
+	height: 75px;
+}
+
+.login-container div{
+	font-weight: 200;
+    font-size: 30px;
+    width: auto;
+    color: white;
+    padding: 10px;
+    font-family: 'Audiowide', cursive;	
+}
+
+.login-div{
+	margin-left:3%;
+}
+
+.login-container:hover{
+    -moz-box-shadow:5px 5px 2px #fff,7px 7px 0px rgba(60,245,0,.2);
+	-webkit-box-shadow:5px 2px 3px #fff,7px 7px 0px rgba(60,245,0,.2);
+	box-shadow: 0 0 5px rgba(255,255,255,0.2) , 0 0 10px rgba(255,255,255,0.2) , 0 0 15px rgba(255,255,255,0.2) , 0 0 20px rgba(60,245,0,0.2) , 0 0 35px rgba(60,245,0,0.2) , 0 0 40px rgba(60,245,0,0.2) , 0 0 50px rgba(60,245,0,0.2);
+
+}

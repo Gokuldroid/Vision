@@ -1,0 +1,26 @@
+<div class="container">
+	 <div class="form-group">
+	 	<label for="abt-title">Title</label>
+	 	<input type="text" id="abt-title" ng-model="title" class="form-control">
+	 </div>
+	 <div>
+		 <texrarea id="about-box" name="about-box" cols="100" rows="100"/>
+	 </div>
+	 <br>
+	  <div>
+		 <button ng-click="addtab()" class="btn btn-primary">Add new tab</button>
+	 </div>
+</div>
+<br>
+<br>
+<div class="container">
+	<div class="row">
+		<div class="panel panel-success" ng-repeat="abttab in abttabs">
+			<div class="panel-heading">
+				<h3 class="panel-title">{{abttab.title}}</h3>
+			</div>
+			<div class="panel-body" ng-bind-html="abttab.content"></div>
+			<button class="btn btn-primary" style="margin-left:48%;margin-bottom:10px;" ng-click="deleteTab(abttab.id)">Delete</button>
+		</div>
+	</div>
+</div>

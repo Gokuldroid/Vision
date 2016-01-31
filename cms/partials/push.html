@@ -1,0 +1,20 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-8">
+			<h3>Push messages</h3>
+			<form  name="pushform" class="form" ng-submit="push()">
+				 <div class="form-group">
+                    <label for="pushmessage">Message</label>
+                    <input type="text" class="form-control" id="pushmessage" name="pushmessage" ng-model="pushmessage.message" required/>
+                    <br>
+                    <button class="btn btn-primary" type="submit">
+                        Send push
+                    </button>
+                </div>
+			</form>
+		</div>
+        <div class="col-md-8 alert alert-success">
+            This message is sent to all android devices which has vision App
+        </div>
+	</div>
+</div>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" href="style/aboutus.css">
+	<link rel="stylesheet" href="style/bootstrap.min.css">
+	<link rel="stylesheet" href="style/home.css">
+	<link rel="stylesheet" href="style/hospitality.css">
+	<link rel="stylesheet" href="style/loading-bar.css">
+	<link rel="stylesheet" href="style/login.css">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="description" content="vision,vision 2016,events">
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" >
+	<script src="script/jquery-1.11.2.min.js"></script>
+	<script src="script/angular.min.js"></script>
+	<script src="script/loading-bar.js"></script>
+	<script src="script/angular-animate.min.js"></script>
+	<script src="script/angular-messages.min.js"></script>
+	<script src="script/angular-route.min.js"></script>
+	<script src="script/angular-cookies.min.js"></script>
+	<script src="script/angular-sanitize.min.js"></script>
+	<script src="script/home/app.js"></script>
+	<script src="script/home/script.js"></script>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<meta name="google-signin-client_id" content="400502752733-lprr94cu90p63bqa66dbksl6q80hts37.apps.googleusercontent.com">
+	<title>Vision 2016</title>
+</head>
+<body ng-app="home" ng-controller="mainController" ng-init="currentTab=1">
+		<div class="bg"></div>
+		<div class="header-content">
+		    	<div class="logo">
+					<img src="images/logo/ceg_logo.png" id="ceg-logo" alt="ceg logo">
+					<img src="images/logo/ecea_logo.png" id="ecea-logo" alt="ecea logo">
+					<img src="images/logo/vision_logo.png" id="vision-logo" alt="vision logo">
+				</div>
+		       <nav id="main-nav"> 
+			         <ul>	
+			        	<li><a href="#home" ng-class="{'active-tab':currentTab==1}" ng-click='currentTab=1'>Home</a></li>
+			            <li><a href="#events" ng-class="{'active-tab':currentTab==2}" ng-click='currentTab=2'>Events</a></li>
+			            <li><a href="#workshop" ng-class="{'active-tab':currentTab==3}" ng-click='currentTab=3'>Workshops</a></li>
+			            <li><a href="#hospitality" ng-class="{'active-tab':currentTab==4}" ng-click='currentTab=4'>Hospitality</a></li>
+			            <li><a href="#contacts" ng-class="{'active-tab':currentTab==5}" ng-click='currentTab=5'>Contacts</a></li>
+			            <li><a href="#aboutus" ng-class="{'active-tab':currentTab==6}" ng-click='currentTab=6'>About us</a></li>
+			            <li><a href="#login" ng-class="{'active-tab':currentTab==7}" ng-click='currentTab=7'>Login</a></li>
+			        </ul>
+		    	</nav>
+		</div>
+		<div id="radar">
+	    	<div id="rad"></div>
+	    	<div class="obj" data-x="120" data-y="235"></div>
+	    	<div class="obj" data-x="120" data-y="65"></div>
+	    	<div class="obj" data-x="140" data-y="185"></div>
+	    	<div class="obj" data-x="220" data-y="35"></div>
+	    </div>
+	<div ng-view class="partial-div"></div>
+</body>
+</html>

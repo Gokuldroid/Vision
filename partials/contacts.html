@@ -1,0 +1,12 @@
+<div class="container">
+	<div ng-repeat="(title,contact) in contacts">
+		<div class="contact-title">
+			<p>{{title}}</p>
+		</div>
+		<div class="contact" ng-repeat="c in contact">
+			<img ng-src="{{c.avatar}}" alt="contact picture">
+			<h4 class="name">{{c.name}}</h4>
+			<p class="phonenumber">{{c.phone}}</p>
+		</div>
+	</div>
+</div>
