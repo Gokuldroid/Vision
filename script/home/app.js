@@ -54,14 +54,22 @@ app.controller('aboutusController',function ($scope,$http){
 app.controller('mainController',function ($scope,$http){
 
 });
-app.controller('loginController',function ($scope,$http,$window,loginService){
+app.controller('loginController',function ($scope,$http,$window,loginService,$cookieStore){
 	$scope.isLoggedin=false;
 
 	$scope.initLogin=function(){
-		if(loginService.getUser())
-			$scope.isLoggedin=true;
-		else{
-				$scope.isLoggedin=false;		
+		var promise=loginService.inituser();
+		if(promise!=null){
+			promise.then(function(response){
+				if(response.data.result){
+					loginService.setuser(response.data);
+					$scope.isLoggedin=true;			
+				}
+			},function(error){
+				console.log(error);
+			});
+		}else{
+			$scope.isLoggedin=false;			
 		}
 	};
 	$scope.initLogin();
@@ -72,7 +80,19 @@ app.controller('loginController',function ($scope,$http,$window,loginService){
 			FB.login(function(response){
 				if(response.authResponse.accessToken){
 					FB.api('/me','GET',{fields:'name,id'}, function(response) {
-					      console.log("Response   :"+JSON.stringify(response));
+					      parms={username:response.name,access_token:response.id};
+					      var result=loginService.login(parms);
+					      result.then(function(response){
+					      	if(response.data.result=="true"){
+								loginService.setuser(response.data);
+								$scope.isLoggedin=true;
+					      		console.log(response);	
+					      	}else{
+					      		console.log(response);	
+					      	}
+					      },function(error){
+					      	console.log(error);
+					      });
 					});
 				}else{
 					console.log("fb login denied");
@@ -95,43 +115,52 @@ app.controller('loginController',function ($scope,$http,$window,loginService){
 	$scope.signInCallback = function(authResult) {
         if(authResult['access_token']){
         	$http.get('https://www.googleapis.com/plus/v1/people/me?access_token='+authResult['access_token']).success(function(response){
-        		console.log("email :"+response.emails[0].value+"  name : ");
-        		console.log(response.displayName);
+        		parms={username:response.displayName,access_token:response.emails[0].value};
+        		var result=loginService.login(parms);
+			      result.then(function(response){
+			      	if(response.data.result=="true"){
+						loginService.setuser(response.data);
+						$scope.isLoggedin=true;
+			      		console.log(response);	
+			      	}else{
+			      		console.log(response);	
+			      	}
+			      },function(error){
+			      	console.log(error);
+			      });
         	});
         }else{
         	console.log("user denied access");
         }
-    };
-
-    $scope.setuser=function(info){
-    	console.log(info);
     };
 });
 
 app.service('loginService',function($http,$cookieStore){
 	this.user=null;
 	this.login=function(parms){
-		var user=$http.put("../api/me?q=login",parms);
-		this.user=user;
-		$cookieStore.put('visionuser',user);
+		return $http.post("../api/me.php?q=login",parms);
 	};
 	this.logout=function(){
-		$http.put("../api/me?q=logout");
+		$http.post("../api/me.php?q=logout");
 		$cookieStore.remove('visionuser');
 		this.user=null;
 	};
-	this.getUser=function(){
-		if(this.user)
+	this.inituser=function(){
+		if($cookieStore.get('visionuser'))
 		{
-			return this.user;			
-		}
-		else if($cookieStore.get('visionuser'))
-		{
-			var user=$http.put("../api/me?q=setuser",$cookieStore.get('visionuser'));
-			this.user=user;
-			return this.user;
+			return $http.post("../api/me.php?q=setuser",$cookieStore.get('visionuser'));
 		}else{
 			return null;
 		}
 	};
+
+	this.getUser=function(){
+		return $http.post("../api/me.php?q=getuser");			
+	};
+
+	this.setuser=function(parms){
+		this.user=parms;
+		$cookieStore.put('visionuser',parms);
+	}
+
 });
